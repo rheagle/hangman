@@ -1,8 +1,9 @@
 class Hangman
-
+  
 
   def initialize
     @setup = Setup.new
+    @save_game = SaveGame.new
     @guesses_left = 7
     @word = @setup.pick_word
     @blanks = @setup.blank_array(@word)
@@ -12,7 +13,6 @@ class Hangman
 
 
   def display_board
-    p @word # DELETE this line later
     puts "\n"
     puts @blanks.join(" ") # Print lines & correct letters
     puts "\n"
@@ -78,20 +78,54 @@ class Hangman
     end
   end
 
+  def main_menu
+    puts "Let's play Hangman!"
+    puts "1. Start new game"
+    puts "2. Load saved game"
+   
+    menu_choice = gets.chomp.to_i
+
+    if menu_choice == 1
+      start
+    elsif menu_choice == 2
+      loaded_game = @save_game.load_game
+      if loaded_game
+        puts "Game loaded successfully!"
+        loaded_game.start
+      else
+        puts "Failed to load game."
+      end
+    else
+      puts "Invalid choice. Enter '1' to start a new game, enter '2' to load a saved game."
+    end
+    
+  end
+
+
+  def continue_save
+    puts "Press 'S' to save game, or enter to continue playing."
+    continue_choice = gets.chomp.upcase
+    if continue_choice == 'S'
+      print "Enter a name for your save file: "
+      filename = gets.chomp
+      @save_game.save_current_game(self, filename)
+      exit
+    end
+    false
+  end
+
 
   def play_turn
+    return if continue_save # Exit play_turn if game was saved
+
     get_guess
-
     update_blanks
-
     update_letters
-
     display_board
   end
 
 
   def start
-    puts "Let's play Hangman! I have picked a word..."
     display_board
 
     while !game_over?

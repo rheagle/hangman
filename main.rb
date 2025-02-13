@@ -5,4 +5,4 @@ require_relative 'lib/hangman'
 
 
 game = Hangman.new
-game.display_board
+game.start

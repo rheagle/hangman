@@ -17,17 +17,4 @@ class Setup
     Array.new(word.length, "_")
   end
 
-=begin
-  def display_board(blanks)
-    puts ""
-    puts blanks.join(" ")
-  end
-=end
-
-    
-
- # def start
-
-
-
 end

@@ -1,4 +1,4 @@
-# hangman
+# Hangman
 
 
 ## To play this game:

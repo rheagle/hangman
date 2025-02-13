@@ -23,6 +23,8 @@
  Click the green "Code" button, select SSH & copy.
   ```bash
   git clone https://github.com/your-username/your-repo.git
+  ```
+  ```bash
   cd your-repo
   ```
 ### 5. Install dependencies in the Gemfile.
